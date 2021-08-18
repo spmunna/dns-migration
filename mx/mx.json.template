@@ -1,0 +1,13 @@
+{
+                "Comment": "CREATE/DELETE/UPDATE",
+                 "Changes": [
+{
+                            "Action": "CREATE",
+                            "ResourceRecordSet": {
+                                 "Name": "",
+                                 "Type": "MX",
+                                  "TTL": 600,
+                                  "ResourceRecords": []
+                           }}
+]
+}
