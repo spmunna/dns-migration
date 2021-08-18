@@ -86,7 +86,7 @@ for entry in os.scandir(parser.get("config", "csv_dir")):
                         "ResourceRecordSet": {
                             "Name": key,
                             "Type": "MX",
-                            "TTL": parser.get("config", "mx_ttl"),
+                            "TTL": int(parser.get("config", "mx_ttl")),
                             "ResourceRecords": []
                         }
                     })    
