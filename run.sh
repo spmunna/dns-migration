@@ -18,8 +18,8 @@ done
 
 #cleanup
 for d in infoblox/*/ ; do
-    rm -rf $d
+    #rm -rf $d
 done	
 for f in mx/*.json ; do
-    rm -f $f
+    #rm -f $f
 done
