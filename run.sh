@@ -17,9 +17,9 @@ for d in infoblox/*/ ; do
 done
 
 #cleanup
-for d in infoblox/*/ ; do
+#for d in infoblox/*/ ; do
     #rm -rf $d
-done	
-for f in mx/*.json ; do
+#done	
+#for f in mx/*.json ; do
     #rm -f $f
-done
+#done
