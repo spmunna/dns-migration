@@ -1,6 +1,10 @@
 #! /bin/sh
 
-hosted_zone_id="Z0243949NVR9LVUYI2AX"
+export IFS=","
+hosted_zone_ids="Z0243949NVR9LVUYI2AX,Z0040812XL90VNTJJKSU"
 
-python3 ttl.py "$hosted_zone_id"
+for id in $hosted_zone_ids; do
+#echo $id
+python3 ttl.py "$id"
+done
 
