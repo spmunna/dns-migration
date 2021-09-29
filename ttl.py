@@ -37,6 +37,26 @@ try:
                     }
                 )
                 print(response)
+            if record['Type'] == 'MX':
+                print(record['Name'])
+                response = client.change_resource_record_sets(
+                    HostedZoneId=hostedZoneId,
+                    ChangeBatch={
+                        'Comment': 'Update TTL',
+                        'Changes': [
+                        {
+                            'Action': 'UPSERT',
+                            'ResourceRecordSet': {
+                                'Name': record['Name'],
+                                'Type': 'MX',
+                                'TTL': int(parser.get("config", "mx_ttl")),
+                                'ResourceRecords': record['ResourceRecords']
+                            }
+                        },
+                        ]
+                    }
+                )
+                print(response)
             if record['Type'] == 'CNAME':
                 print(record['Name'])
                 response = client.change_resource_record_sets(
