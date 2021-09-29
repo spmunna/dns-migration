@@ -17,6 +17,86 @@ try:
     source_zone_records = paginator.paginate(HostedZoneId=hostedZoneId)
     for record_set in source_zone_records:
         for record in record_set['ResourceRecordSets']:
+            if record['Type'] == 'HOSTRECORD':
+                print(record['Name'])
+                response = client.change_resource_record_sets(
+                    HostedZoneId=hostedZoneId,
+                    ChangeBatch={
+                        'Comment': 'Update TTL',
+                        'Changes': [
+                        {
+                            'Action': 'UPSERT',
+                            'ResourceRecordSet': {
+                                'Name': record['Name'],
+                                'Type': 'HOSTRECORD',
+                                'TTL': int(parser.get("config", "hostrecord_ttl")),
+                                'ResourceRecords': record['ResourceRecords']
+                            }
+                        },
+                        ]
+                    }
+                )
+                print(response)
+            if record['Type'] == 'CNAME':
+                print(record['Name'])
+                response = client.change_resource_record_sets(
+                    HostedZoneId=hostedZoneId,
+                    ChangeBatch={
+                        'Comment': 'Update TTL',
+                        'Changes': [
+                        {
+                            'Action': 'UPSERT',
+                            'ResourceRecordSet': {
+                                'Name': record['Name'],
+                                'Type': 'CNAME',
+                                'TTL': int(parser.get("config", "cname_ttl")),
+                                'ResourceRecords': record['ResourceRecords']
+                            }
+                        },
+                        ]
+                    }
+                )
+                print(response)
+            if record['Type'] == 'TXT':
+                print(record['Name'])
+                response = client.change_resource_record_sets(
+                    HostedZoneId=hostedZoneId,
+                    ChangeBatch={
+                        'Comment': 'Update TTL',
+                        'Changes': [
+                        {
+                            'Action': 'UPSERT',
+                            'ResourceRecordSet': {
+                                'Name': record['Name'],
+                                'Type': 'TXT',
+                                'TTL': int(parser.get("config", "txt_ttl")),
+                                'ResourceRecords': record['ResourceRecords']
+                            }
+                        },
+                        ]
+                    }
+                )
+                print(response)
+            if record['Type'] == 'A':
+                print(record['Name'])
+                response = client.change_resource_record_sets(
+                    HostedZoneId=hostedZoneId,
+                    ChangeBatch={
+                        'Comment': 'Update TTL',
+                        'Changes': [
+                        {
+                            'Action': 'UPSERT',
+                            'ResourceRecordSet': {
+                                'Name': record['Name'],
+                                'Type': 'A',
+                                'TTL': int(parser.get("config", "a_ttl")),
+                                'ResourceRecords': record['ResourceRecords']
+                            }
+                        },
+                        ]
+                    }
+                )
+                print(response)
             if record['Type'] == 'NS':
                 print(record['Name'])
                 response = client.change_resource_record_sets(
